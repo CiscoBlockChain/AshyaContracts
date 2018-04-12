@@ -5,7 +5,7 @@ contract AshyaRegistry {
         
         string iname;
         string location;
-        string[] urls;
+        string url;
         address ownerAddress;
         uint index;
         
@@ -21,12 +21,12 @@ contract AshyaRegistry {
         itemIndex.length = 0;
     }
 
-    function addItem(string name, string location, string url,address itemAddress, address ownerAddress) public  {        
+    function addItem(string name, string location, string url) public  {        
         //var itemnew = item(name ,url, location, itemAddress);
         itemList[itemAddress].iname = name;
         itemList[itemAddress].location = location;
-        itemList[itemAddress].urls.push(url);
-        itemList[itemAddress].ownerAddress = ownerAddress; 
+        itemList[itemAddress].url = url
+        itemList[itemAddress].ownerAddress = msg.sender
         itemList[itemAddress].index = itemIndex.push(itemAddress)-1;
         
         emit LogNewItem(
