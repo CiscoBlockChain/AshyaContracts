@@ -10,7 +10,7 @@ contract AshyaDevice{
         _;
     }
 
-function AshyaDevice(string name, string location, string url)public payable
+function AshyaDevice(string name, string location, string url)public payable checkPrice
 {
     AshyaRegistry deviceObj = AshyaRegistry(AshyaRegistryAddress);
     deviceObj.addItem.value(AddingPrice)(name,location,url);
