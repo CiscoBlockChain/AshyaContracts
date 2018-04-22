@@ -14,7 +14,7 @@ contract AshyaRegistry{
 
 
     modifier CheckPrice()
-    {require(msg.value == price);
+    {require(msg.value >= price);
         _;
     }
     modifier onlyBy(address _itemAddress)
