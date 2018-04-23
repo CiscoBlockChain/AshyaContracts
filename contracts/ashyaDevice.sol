@@ -1,16 +1,16 @@
-pragma solidity ^0.4.19;
-
 contract AshyaDevice{
-    address AshyaRegistryAddress= 0x8609a0806279c94bcc5432e36b57281b3d524b9b;
+    address AshyaRegistryAddress= 0x75a3a98f5696299071da253c1433a2661898103e;
     string[] urls;
     uint AddingPrice = 0.0010 ether;
+    address public owner = msg.sender;
+    
     modifier CheckPrice()
     {
         require(msg.value == AddingPrice);
         _;
     }
 
-function AshyaDevice(string name, string location, string url)public payable checkPrice
+function AshyaDevice(string name, string location, string url)public payable CheckPrice
 {
     AshyaRegistry deviceObj = AshyaRegistry(AshyaRegistryAddress);
     deviceObj.addItem.value(AddingPrice)(name,location,url);
@@ -23,6 +23,10 @@ function getUrlsCount()public constant returns(uint count)
 {
     return urls.length;
 }
+
+function getOwnerAddress() public constant returns(address owner){
+    return owner;
+} 
 
 
 }
