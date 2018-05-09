@@ -41,6 +41,7 @@ contract AshyaDevice {
         registry.addItem.value(0.0010 ether)(name,location,url);
     }
 
+  
     function addURL(string newUrl)public payable CheckPrice(){
         urls.push(newUrl);
     }

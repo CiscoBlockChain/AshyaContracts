@@ -77,3 +77,12 @@ Close the truffle environment
 ```
 .exit
 ```
+
+## CI/CD
+
+Set the Drone file information
+
+```
+drone secret add CiscoBlockChain/AshyaRegistry -image vallard/drone-spark -name SPARK_TOKEN -value $ASHYA_TOKEN
+drone secret add CiscoBlockChain/AshyaRegistry -image vallard/drone-spark -name SPARK_ROOM -value $ASHYA_SPARKROOM
+```
