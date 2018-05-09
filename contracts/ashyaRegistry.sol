@@ -1,34 +1,5 @@
 pragma solidity ^0.4.19;
 
-contract AshyaDevice {
-    //address AshyaRegistryAddress= 0x35ef07393b57464e93deb59175ff72e6499450cf;
-    string[] urls;
-    uint AddingPrice = 0.0010 ether;
-    address public owner = msg.sender;
-    AshyaRegistry deviceObj;
-
-    modifier CheckPrice(){
-        require(msg.value == AddingPrice);
-        _;
-    }
-
-    function AshyaDevice(address AshyaRegistryAddress, string name, string location, string url) public payable CheckPrice() {
-        deviceObj = AshyaRegistry(AshyaRegistryAddress);
-        deviceObj.addItem.value(AddingPrice)(name,location,url);
-    
-    }
-
-    function AddUrl(string url)public payable CheckPrice(){
-        urls.push(url);
-        
-    }
-    function getUrlsCount()public constant returns(uint count) {
-        return urls.length;
-        
-    }
-}
-
-
 contract AshyaRegistry{
 
     uint price = 0.0010 ether;
@@ -42,7 +13,6 @@ contract AshyaRegistry{
     mapping(address => item) itemList;
     address[] itemIndex;
 
-
     modifier CheckPrice()
     {
         require(msg.value >= price);
@@ -50,10 +20,11 @@ contract AshyaRegistry{
     }
     modifier onlyBy(address _itemAddress)
     {
-        require(msg.sender == AshyaDevice(_itemAddress).owner());
+        require(msg.sender == _itemAddress);
         _;
     }
-    
+   
+    // Only let it add if it has not yet been added. 
     modifier canAdd(string _name, string _url, string _location) 
     {
         bool newItem = true;
@@ -75,6 +46,7 @@ contract AshyaRegistry{
     function getItemCount()public constant returns(uint count){
         return itemIndex.length;
     }
+
     function addItem(string _name, string _location, string _url) public payable CheckPrice canAdd(_name,_location,_url){
         itemList[msg.sender].name = _name;
         itemList[msg.sender].location = _location;
