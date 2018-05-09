@@ -83,6 +83,6 @@ Close the truffle environment
 Set the Drone file information
 
 ```
-drone secret add -repository CiscoBlockChain/AshyaRegistry -image vallard/drone-spark -name SPARK_TOKEN -value $ASHYA_TOKEN
-drone secret add -repository CiscoBlockChain/AshyaRegistry -image vallard/drone-spark -name SPARK_ROOM -value $ASHYA_SPARKROOM
+drone secret add CiscoBlockChain/AshyaRegistry -image vallard/drone-spark -name SPARK_TOKEN -value $ASHYA_TOKEN
+drone secret add CiscoBlockChain/AshyaRegistry -image vallard/drone-spark -name SPARK_ROOM -value $ASHYA_SPARKROOM
 ```
