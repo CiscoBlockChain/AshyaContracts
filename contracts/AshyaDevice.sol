@@ -38,9 +38,10 @@ contract AshyaDevice {
              OwnerOnly() {
         registry = AshyaRegistry(registryAddress);
          
-        //registry.addItem.value(0.0010 ether)(name,location,url);
+        registry.addItem.value(0.0010 ether)(name,location,url);
     }
 
+  
     function addURL(string newUrl)public payable CheckPrice(){
         urls.push(newUrl);
     }

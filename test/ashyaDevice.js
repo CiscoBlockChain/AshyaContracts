@@ -18,7 +18,7 @@ contract(AshyaDevice, function(accounts) {
     try {
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
       let rAddr = registry.address;
-      let result = await device.registerDevice(rAddr, {from: owner, value: 10000000000000, gas: 4712388, gasPrice: 100000000000})
+      let result = await device.registerDevice(rAddr, {from: owner, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
       //console.log(result.toString())
       //assert.equal(result.toString(), owner)
     } catch (e) {
