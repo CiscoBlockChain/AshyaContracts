@@ -50,7 +50,7 @@ contract AshyaRegistry{
     function addItem(string _name, string _location, string _url) public payable CheckPrice canAdd(_name,_location,_url){
         itemList[msg.sender].name = _name;
         itemList[msg.sender].location = _location;
-        itemList[msg.sender].url= _url;
+        itemList[msg.sender].url = _url;
         itemList[msg.sender].index = itemIndex.push(msg.sender)-1;
 
 
