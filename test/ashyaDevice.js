@@ -20,10 +20,30 @@ contract(AshyaDevice, function(accounts) {
       let rAddr = registry.address;
       let result = await device.registerDevice(rAddr, {from: owner, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
       //console.log(result.toString())
-      //assert.equal(result.toString(), owner)
     } catch (e) {
-      console.log('failed')
       assert.fail(null, null, `${e}`)
     }
   })
+
+  it("should not allow non owners register the device", async () => {
+    try {
+      //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
+      let rAddr = registry.address;
+      let result = await device.registerDevice(rAddr, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      //console.log(result.toString())
+      assert.fail(null, null, `${e}`)
+    } catch (e) {
+      console.log('failed as expected')
+    }
+  })
+/*
+  it("should allow anybody to register their device", async () => {
+    try {
+      awat device. 
+
+    }
+
+  }
+*/
+
 })
