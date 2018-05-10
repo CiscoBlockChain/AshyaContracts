@@ -50,11 +50,10 @@ contract AshyaRegistry{
     function addItem(string _name, string _location, string _url) public payable CheckPrice canAdd(_name,_location,_url){
         itemList[msg.sender].name = _name;
         itemList[msg.sender].location = _location;
-        itemList[msg.sender].url= _url;
+        itemList[msg.sender].url = _url;
         itemList[msg.sender].index = itemIndex.push(msg.sender)-1;
-
-
     }
+
     function removeItem(address _itemAddress)public onlyBy(_itemAddress){
         uint rowToDelete = itemList[_itemAddress].index;
         address keyToMove = itemIndex[itemIndex.length-1];
@@ -62,10 +61,11 @@ contract AshyaRegistry{
         itemList[keyToMove].index = rowToDelete;
         itemIndex.length--;
     }
-    function getItem(address itemAddress)public constant returns(string name, string location, string url, uint index)
-    {
+
+    function getItem(address itemAddress)public constant returns(string name, string location, string url, uint index) {
         return(itemList[itemAddress].name,itemList[itemAddress].location,itemList[itemAddress].url,itemList[itemAddress].index);
     }
+
     function getItemAtIndex(uint index) public constant returns(address itemAddress) {
         return itemIndex[index];
         

@@ -36,14 +36,71 @@ contract(AshyaDevice, function(accounts) {
       console.log('failed as expected')
     }
   })
-/*
-  it("should allow anybody to register their device", async () => {
+
+  it("should add a new Url", async () => {
     try {
-      awat device. 
-
+      //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
+      //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
+      let i = "https://sanaIOT.com";
+      let result = await device.addURL(i, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      //console.log(result.toString())
+      //assert.equal(result.toString(), owner)
+    } catch (e) {
+      console.log('failed')
+      assert.fail(null, null, `${e}`)
     }
+  })
 
-  }
-*/
+  it("get URL count", async () => {
+    try {
+      // d.then(i => i.getURLCount())
+      let result = await device.getURLCount.call({from: otherAccount})
+      console.log(result)
+      //console.log(result.toString())
+      //assert.equal(result.toString(), owner)
+    } catch (e) {
+      console.log('failed')
+      assert.fail(null, null, `${e}`)
+    }
+  })
+
+  it("should return item", async () => {
+    try {
+      //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
+      //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
+      let rAddr = device.address;
+      let result = await registry.getItem(rAddr,{from: otherAccount})
+      console.log(result)
+    } catch (e) {
+      console.log('failed')
+      assert.fail(null, null, `${e}`)
+    }
+  })
+
+  it("returning Item at specified index", async () => {
+    try {
+      //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
+      //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
+      let i = 0 ;
+      let result = await registry.getItem(i,{from: otherAccount})
+      console.log(result)
+    } catch (e) {
+      console.log('failed')
+      assert.fail(null, null, `${e}`)
+    }
+  })
+
+  it("Add new item", async () => {
+    try {
+      //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
+      //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
+      let i = ("Camera B","", "https://Vallard-iot.Portland")
+      let result = await registry.addItem(i,{from: owner, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      console.log(result)
+    } catch (e) {
+      console.log('failed')
+      assert.fail(null, null, `${e}`)
+    }
+  })
 
 })
