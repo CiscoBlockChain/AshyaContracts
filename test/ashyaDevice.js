@@ -3,7 +3,7 @@ var AshyaRegistry = artifacts.require("AshyaRegistry");
 
 contract(AshyaDevice, function(accounts) {
 
-  /* from: https://ethereum.stackexchange.com/questions/38756/how-to-test-contract-functions-with-onlyowner-modifier */ 
+  /* from: https://ethereum.stackexchange.com/questions/38756/how-to-test-contract-functions-with-onlyowner-modifier */
   let instance
   let owner = accounts[0]
   let otherAccount = accounts[1]
@@ -19,7 +19,7 @@ contract(AshyaDevice, function(accounts) {
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
       let rAddr = registry.address;
       let result = await device.registerDevice(rAddr, {from: owner, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
-      //console.log(result.toString())
+      console.log(result)
     } catch (e) {
       assert.fail(null, null, `${e}`)
     }
@@ -42,7 +42,12 @@ contract(AshyaDevice, function(accounts) {
       //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
       let i = "https://sanaIOT.com";
+      let a = "https://VallardIot.com";
+      let b = "https://SarahIot.com";
       let result = await device.addURL(i, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      let result1 = await device.addURL(a, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      let result2 = await device.addURL(b, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      console.log(result)
       //console.log(result.toString())
       //assert.equal(result.toString(), owner)
     } catch (e) {
@@ -81,7 +86,7 @@ contract(AshyaDevice, function(accounts) {
     try {
       //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
-      let i = 0 ;
+      let i = 1 ;
       let result = await registry.getItem(i,{from: otherAccount})
       console.log(result)
     } catch (e) {
@@ -90,17 +95,19 @@ contract(AshyaDevice, function(accounts) {
     }
   })
 
-  it("Add new item", async () => {
+  it("remove device", async () => {
     try {
       //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
-      let i = ("Camera B","", "https://Vallard-iot.Portland")
-      let result = await registry.addItem(i,{from: owner, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      let daddr = owner;
+      let result = await registry.removeItem(daddr,{from: owner})
       console.log(result)
+
     } catch (e) {
       console.log('failed')
       assert.fail(null, null, `${e}`)
     }
+
   })
 
 })

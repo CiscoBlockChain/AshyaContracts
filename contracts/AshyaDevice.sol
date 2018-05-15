@@ -12,7 +12,7 @@ contract AshyaDevice {
     address public owner;
     AshyaRegistry registry;
 
-    /* only the device owner can register the device. */ 
+    /* only the device owner can register the device. */
     modifier OwnerOnly() {
       require(msg.sender == owner);
       _;
@@ -32,23 +32,22 @@ contract AshyaDevice {
       url = _url;
     }
 
-    function registerDevice(address registryAddress) 
-             public 
-             payable 
+    function registerDevice(address registryAddress)
+             public
+             payable
              OwnerOnly() {
         registry = AshyaRegistry(registryAddress);
-         
+
         registry.addItem.value(0.0010 ether)(name,location,url);
     }
 
-  
+
     function addURL(string newUrl)public payable CheckPrice(){
         urls.push(newUrl);
     }
 
     function getURLCount()public constant returns(uint count) {
         return urls.length;
-        
+
     }
 }
-
