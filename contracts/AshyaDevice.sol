@@ -1,3 +1,4 @@
+
 pragma solidity ^0.4.19;
 
 
@@ -30,6 +31,7 @@ contract AshyaDevice {
       name = _name;
       location = _location;
       url = _url;
+      urls.push(url);
     }
 
     function registerDevice(address registryAddress)
