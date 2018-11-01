@@ -31,10 +31,6 @@ contract AshyaDevice {
       name = _name;
       location = _location;
       url = _url;
-<<<<<<< HEAD
-   
-=======
->>>>>>> 3edd576a71cf3272504559dc17d1b18c37f93df5
     }
 
     function registerDevice(address registryAddress)
