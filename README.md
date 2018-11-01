@@ -15,6 +15,11 @@ Another Repository AshyaServer holds the server code that interacts and displays
 ## Testing on the Console
 
 ```
+npm install -g truffle
+npm install -g truffle-hdwallet-provider
+```
+
+```
 truffle develop
 ```
 You'll then be put on the truffle development console.  Now load the contract
