@@ -8,6 +8,7 @@ contract(AshyaDevice, function(accounts) {
   let owner = accounts[0]
   let otherAccount = accounts[1]
 
+
   beforeEach(async () => {
     device = await AshyaDevice.deployed()
     registry = await AshyaRegistry.deployed()
@@ -18,9 +19,32 @@ contract(AshyaDevice, function(accounts) {
     try {
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
       let rAddr = registry.address;
-      let result = await device.registerDevice(rAddr, {from: owner, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      let result = await device.registerDevice(rAddr, {from: owner, value: 400000000000000000, gas: 4712388, gasPrice: 100000000000})
       console.log(result)
     } catch (e) {
+      assert.fail(null, null, `${e}`)
+    }
+  })
+
+  it("get item count", async () => {
+    try {
+      // d.then(i => i.getURLCount())
+      let result = await registry.getItemCount({from: otherAccount})
+      console.log(result)
+    } catch (e) {
+      console.log('failed')
+      assert.fail(null, null, `${e}`)
+    }
+  })
+  it("should return item", async () => {
+    try {
+      //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
+      //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
+      let rAddr = device.address;
+      let result = await registry.getItem(rAddr,{from: owner})
+      console.log(result)
+    } catch (e) {
+      console.log('failed')
       assert.fail(null, null, `${e}`)
     }
   })
@@ -29,8 +53,7 @@ contract(AshyaDevice, function(accounts) {
     try {
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
       let rAddr = registry.address;
-      let result = await device.registerDevice(rAddr, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
-      //console.log(result.toString())
+      let result = await device.registerDevice(rAddr, {from: otherAccount, value: 400000000000000000, gas: 4712388, gasPrice: 100000000000})
       assert.fail(null, null, `${e}`)
     } catch (e) {
       console.log('failed as expected')
@@ -42,11 +65,7 @@ contract(AshyaDevice, function(accounts) {
       //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
       let i = "https://sanaIOT.com";
-      let a = "https://VallardIot.com";
-      let b = "https://SarahIot.com";
-      let result = await device.addURL(i, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
-      let result1 = await device.addURL(a, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
-      let result2 = await device.addURL(b, {from: otherAccount, value: 1000000000000000, gas: 4712388, gasPrice: 100000000000})
+      let result = await device.addURL(i, {from: otherAccount, value: 400000000000000000, gas: 4712388, gasPrice: 100000000000})
       console.log(result)
       //console.log(result.toString())
       //assert.equal(result.toString(), owner)
@@ -59,22 +78,7 @@ contract(AshyaDevice, function(accounts) {
   it("get URL count", async () => {
     try {
       // d.then(i => i.getURLCount())
-      let result = await device.getURLCount.call({from: otherAccount})
-      console.log(result)
-      //console.log(result.toString())
-      //assert.equal(result.toString(), owner)
-    } catch (e) {
-      console.log('failed')
-      assert.fail(null, null, `${e}`)
-    }
-  })
-
-  it("should return item", async () => {
-    try {
-      //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
-      //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
-      let rAddr = device.address;
-      let result = await registry.getItem(rAddr,{from: otherAccount})
+      let result = await device.getURLCount({from: otherAccount})
       console.log(result)
     } catch (e) {
       console.log('failed')
@@ -86,7 +90,7 @@ contract(AshyaDevice, function(accounts) {
     try {
       //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
-      let i = 1 ;
+      let i = 0;
       let result = await registry.getItem(i,{from: otherAccount})
       console.log(result)
     } catch (e) {
@@ -95,12 +99,12 @@ contract(AshyaDevice, function(accounts) {
     }
   })
 
-  it("remove device", async () => {
+  it("should remove a device", async () => {
     try {
       //d.then(i => i.addURL("https://benincosa.com", { value: 1000000000000000, from: accounts[3], gas: 4712388, gasPrice: 100000000000 }))
       //let result = await device.registerDevice.call({from: owner, value: web3.toWei(0.001, "ether")})
-      let daddr = owner;
-      let result = await registry.removeItem(daddr,{from: owner})
+      let daddr = otherAccount;
+      let result = await registry.removeItem(daddr,{from: otherAccount})
       console.log(result)
 
     } catch (e) {
