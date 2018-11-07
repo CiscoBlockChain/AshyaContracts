@@ -5,7 +5,7 @@ pragma solidity ^0.4.19;
 import "./AshyaRegistry.sol";
 
 contract AshyaDevice {
-    uint price = 0.04 ether;
+    uint price = 0.01 ether;
     string name; /* the name of this device */
     string location; /* my location where this device is */
     string url; /* my URL where people can find more information about me */
@@ -39,7 +39,7 @@ contract AshyaDevice {
              OwnerOnly() {
         registry = AshyaRegistry(registryAddress);
 
-        registry.addItem.value(0.04 ether)(name,location,url);
+        registry.addItem.value(0.01 ether)(name,location,url);
     }
 
 

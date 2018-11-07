@@ -2,7 +2,7 @@ pragma solidity ^0.4.19;
 
 contract AshyaRegistry {
 
-    uint price = 0.04 ether;
+    uint price = 0.01 ether;
     struct item {
         string name;
         string url;
